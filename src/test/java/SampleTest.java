@@ -60,7 +60,7 @@ class SampleTest {
                 // какие есть способы закодить лучше
 
                 .when().post("ch/v1/auth/login/")
-                .then().statusCode(200).body("token_type", equalTo("bearer"))
+                .then().assertThat().statusCode(200).body("token_type", equalTo("bearer"))
                 .extract().response().asString();
 
         JsonPath js = new JsonPath(response);
