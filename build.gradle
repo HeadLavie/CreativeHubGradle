@@ -1,0 +1,32 @@
+plugins {
+    id 'java'
+}
+
+group = 'rahulshettyacademy'
+version = '1.0-SNAPSHOT'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'io.rest-assured:rest-assured:5.5.0'
+    implementation 'com.google.code.gson:gson:2.9.0'
+    implementation 'org.hamcrest:hamcrest:3.0'
+    implementation 'com.github.javafaker:javafaker:1.0.2'
+    compileOnly 'org.projectlombok:lombok:1.18.34'
+
+    testImplementation 'org.testng:testng:7.10.2'
+    testImplementation 'junit:junit:4.13.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0' // Updated version
+}
+
+test {
+    useJUnitPlatform()
+}
+
