@@ -5,16 +5,20 @@ Features
 - Dynamic Data: Generates unique user data with JavaFaker.
 - JUnit 5: Organizes tests in a logical, ordered flow.
 
-How to Run:
+### How to Run:
 
 1. Clone the repo:
 
-     git clone https://github.com/HeadLavie/CreativeHubGradle.git
-     cd CreativeHubGradle
+```
+    git clone https://github.com/HeadLavie/CreativeHubGradle.git
+     
+    cd CreativeHubGradle
+```
 
 2. Build and test:
-
+```
     ./gradlew build
+    
     ./gradlew test
-
+```
 This project offers a simple and effective way to practice API testing with modern tools.
