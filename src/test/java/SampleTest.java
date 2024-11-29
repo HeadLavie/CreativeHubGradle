@@ -37,6 +37,7 @@ class SampleTest {
                 .body(user).when().post("ch/v1/user/")
 
                 // body(class.User) не сработало
+
                 .then().assertThat().statusCode(201).extract().response().as(UserResponse.class);
 
     }
@@ -63,7 +64,8 @@ class SampleTest {
                 .then().assertThat().statusCode(200).body("token_type", equalTo("bearer"))
                 .extract().response().asString();
 
-        JsonPath js = new JsonPath(response);
+        JsonPath js = ReUsableMethods.rawToJson(response);
+        // JsonPath js = new JsonPath(response);
         accessToken = js.getString("access_token");
         refreshToken = js.getString("refresh_token");
         tokenHeader = new Header("Authorization", "Bearer " + refreshToken);
@@ -78,7 +80,8 @@ class SampleTest {
                 .statusCode(200).body("access_token", not(equalTo(accessToken)))
                 .extract().response().asString();
 
-        JsonPath js = new JsonPath(response);
+
+        JsonPath js = ReUsableMethods.rawToJson(response);
         accessToken = js.getString("access_token");
 
         // повторяются два теста
