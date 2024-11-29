@@ -4,6 +4,9 @@ import io.restassured.http.Header;
 import io.restassured.path.json.JsonPath;
 import org.junit.jupiter.api.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.not;
@@ -54,11 +57,12 @@ class SampleTest {
     @Order(3)
     void shouldAuthUser() {
 
-        String response = given().header(applicationJsonHeader).body("{\n" +
-                        "  \"email\": \"" + user.getEmail() + "\",\n" +
-                        "  \"password\": \"" + user.getPassword() + "\"\n" +
-                        "}")
-                // какие есть способы закодить лучше
+        Map<String, String> requestBody = new HashMap<>();
+        requestBody.put("email", user.getEmail());
+        requestBody.put("password", user.getPassword());
+
+        String response = given().header(applicationJsonHeader).body(requestBody)
+                // не очень понимаю Map
 
                 .when().post("ch/v1/auth/login/")
                 .then().assertThat().statusCode(200).body("token_type", equalTo("bearer"))
@@ -90,6 +94,22 @@ class SampleTest {
 
     @Test
     @Order(5)
+    void shouldResetPassword() {
+
+        String email = user.getEmail();
+
+        given().header(applicationJsonHeader).body(Map.of("email", email))
+                .when()
+                .post("ch/v1/reset-password/request/").then()
+                .assertThat()
+                .statusCode(200)
+                .body("message", equalTo("Инструкция по сбросу пароля отправлена на вашу почту."));
+
+    }
+
+
+    @Test
+    @Order(6)
     void shouldDeleteUser() {
 
         given().header("Authorization", "Bearer " + accessToken).when().delete("ch/v1/user/").then()
