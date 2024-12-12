@@ -26,7 +26,7 @@ public class GetUserTest {
     @Test
     void shouldPostUser() {
 
-        given().log().all().header(applicationJsonHeader)
+        UserResponse postUser = given().log().all().header(applicationJsonHeader)
                 .body(user).when().post("ch/v1/user/")
                 .then().assertThat().statusCode(201).extract().response().as(UserResponse.class);
 
