@@ -1,4 +1,7 @@
 
+import Models.User;
+import Models.UserResponse;
+import Utils.*;
 import io.restassured.RestAssured;
 import io.restassured.http.Header;
 import io.restassured.path.json.JsonPath;
@@ -28,19 +31,25 @@ class SampleTest {
         RestAssured.baseURI = "https://ch-dev.testant.online";
     }
 
+    // todo пароль имеет 8 символов всегда, нет вариантивности
+    //  можно ли реализовать UserResponse как child class от User?
+    //  не делаются папки для тестов
+
+    //  5. писать датагенерейт и датаинкорректдатагенерейт - подставить в юзера
+    //  6.Вынести создание полей в класс датагенератор 7.переименовать юзер в RequestUser
+    //  8. на хабре читать про ламбок
+    //  9. хэдерст через фешмап создать - это будет хэдерс и внутри него несколько обьектов
+    //  10. в атомарных тестах будет новый юзер в бефорич
+    //  11. найти инструмент который по свагеру генерят модель - создай джава модель по этой структуре
+
+
 
     @Test
     @Order(1)
     void shouldPostUser() {
 
         given().log().all().header(applicationJsonHeader)
-
-                // можно ли тут Header.class("Content-Type", "application/json")
-
                 .body(user).when().post("ch/v1/user/")
-
-                // body(class.User) не сработало
-
                 .then().assertThat().statusCode(201).extract().response().as(UserResponse.class);
 
     }
@@ -49,8 +58,10 @@ class SampleTest {
     @Order(2)
     void shouldGetUser() {
 
-        given().when().get("/ch/v1/user/" + UserResponse.uid)
+        given().when().get("ch/v1/user/" + UserResponse.uid)
                 .then().log().all().assertThat().body("first_name", equalTo(UserResponse.first_name));
+
+        // statusCode(200)
     }
 
     @Test
@@ -115,5 +126,9 @@ class SampleTest {
         given().header("Authorization", "Bearer " + accessToken).when().delete("ch/v1/user/").then()
                 .assertThat().statusCode(204);
 
+        // todo тесты не должны зависеть друг от друга,
+        //  тесты раскидать по классам, проверки на каждый из кодов
+
     }
+
 }

@@ -1,4 +1,6 @@
-import com.github.javafaker.Faker;
+package Models;
+
+import Utils.DataGenerator;
 
 public class User {
 
@@ -9,12 +11,10 @@ public class User {
 
     public User() {
 
-        Faker faker = new Faker();
-
-        this.first_name = faker.name().firstName();
-        this.second_name = faker.name().lastName();
-        this.email = faker.internet().emailAddress();
-        this.password = "11112222";
+        this.first_name = DataGenerator.generateFirstName();
+        this.second_name = DataGenerator.generateSecondName();
+        this.email = DataGenerator.generateEmail();
+        this.password = DataGenerator.generateValidPassword();
     }
 
 

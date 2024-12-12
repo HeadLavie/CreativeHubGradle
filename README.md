@@ -17,8 +17,6 @@ Features
 
 2. Build and test:
 ```
-    ./gradlew build
-    
     ./gradlew test
 ```
 This project offers a simple and effective way to practice API testing with modern tools.

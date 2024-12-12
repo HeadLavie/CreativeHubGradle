@@ -1,3 +1,5 @@
+package Utils;
+
 import io.restassured.path.json.JsonPath;
 
 public class ReUsableMethods {

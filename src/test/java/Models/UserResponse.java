@@ -1,3 +1,5 @@
+package Models;
+
 public class UserResponse {
 
     public static String first_name;
@@ -7,5 +9,6 @@ public class UserResponse {
     public static String username;
     public static String photo;
     public static String last_visited_at;
+    public static String profile_cover;
 
 }
