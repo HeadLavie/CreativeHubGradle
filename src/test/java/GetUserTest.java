@@ -31,6 +31,9 @@ public class GetUserTest {
                 .then().assertThat().statusCode(201).extract().response().as(UserResponse.class);
 
         System.out.println("User ID: " + UserResponse.uid);
+        System.out.println("User name: " + UserResponse.first_name);
+
+        // chatgpt сказал использовать UserResponse.gitUid()
     }
 
     @Test

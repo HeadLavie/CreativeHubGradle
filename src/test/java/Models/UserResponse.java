@@ -11,4 +11,5 @@ public class UserResponse {
     public static String last_visited_at;
     public static String profile_cover;
 
+    // chatgpt сказал не использовать public static
 }
